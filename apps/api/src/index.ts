@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { pool } from "@habit-tracker/database";
+import { authRouter } from "./routes/authRouter";
 
 const PORT = process.env.PORT || 3000;
 
@@ -22,6 +23,8 @@ app.get("/health", async (req, res) => {
     return res.status(500).json({ status: "error", db: "unreachable" });
   }
 });
+
+app.use("/api/auth", authRouter);
 
 async function main() {
   try {
