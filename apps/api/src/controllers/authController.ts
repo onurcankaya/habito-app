@@ -1,15 +1,17 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { v4 as uuidv4 } from "uuid";
 import type { RegisterUserDTO, LoginUserDTO } from "../types";
-import { createUser, findUserByEmail } from "../repositories/userRepository";
+import * as userRepository from "../repositories/userRepository";
 import { requireEnv } from "../utils/env";
 
 async function registerUser(data: RegisterUserDTO) {
+  const userId = uuidv4();
   const password_hash = await bcrypt.hash(data.password, 10);
 
-  await createUser({ ...data, password_hash });
+  await userRepository.createUser(userId, { ...data, password_hash });
 
-  const user = await findUserByEmail(data.email);
+  const user = await userRepository.findUserByEmail(data.email);
 
   if (!user) {
     throw new Error("Failed to create user");
@@ -23,7 +25,7 @@ async function registerUser(data: RegisterUserDTO) {
 }
 
 async function loginUser(data: LoginUserDTO) {
-  const user = await findUserByEmail(data.email);
+  const user = await userRepository.findUserByEmail(data.email);
 
   if (!user) {
     throw new Error("Invalid credentials");

@@ -1,11 +1,11 @@
-import express, { Request, Response } from "express";
-import { registerUser, loginUser } from "../controllers/authController";
+import express, { type Request, type Response } from "express";
+import * as authController from "../controllers/authController";
 
 const authRouter = express.Router();
 
 authRouter.post("/register", async (req: Request, res: Response) => {
   try {
-    const JWT = await registerUser({
+    const JWT = await authController.registerUser({
       email: req.body.email,
       password: req.body.password,
       first_name: req.body.first_name,
@@ -19,7 +19,7 @@ authRouter.post("/register", async (req: Request, res: Response) => {
 
 authRouter.post("/login", async (req: Request, res: Response) => {
   try {
-    const JWT = await loginUser({
+    const JWT = await authController.loginUser({
       email: req.body.email,
       password: req.body.password,
     });
