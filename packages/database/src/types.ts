@@ -33,4 +33,5 @@ export interface CompletedActivity extends RowDataPacket {
   completed_at: string;
   user_id: string;
   habit_id: string;
+  habit_title: string;
 }

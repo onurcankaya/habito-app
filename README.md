@@ -34,3 +34,12 @@ POST /api/habits
 PATCH /api/habits/:id
 DELETE /api/habits/:id
 ```
+
+### Completed Activities API
+
+```bash
+GET /api/activities
+GET /api/activities/:id
+POST /api/activities
+DELETE /api/activities/:id
+```

@@ -4,9 +4,10 @@ import cors from "cors";
 import { pool } from "@habit-tracker/database";
 import {
   authRouter,
+  usersRouter,
   categoriesRouter,
   habitsRouter,
-  usersRouter,
+  activitiesRouter,
 } from "./routes";
 import { errorHandler } from "./middleware";
 
@@ -31,9 +32,10 @@ app.get("/health", async (req, res) => {
 });
 
 app.use("/api/auth", authRouter);
+app.use("/api/users", usersRouter);
 app.use("/api/categories", categoriesRouter);
 app.use("/api/habits", habitsRouter);
-app.use("/api/users", usersRouter);
+app.use("/api/activities", activitiesRouter);
 app.use(errorHandler);
 
 async function main() {
