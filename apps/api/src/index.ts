@@ -2,7 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { pool } from "@habit-tracker/database";
-import { authRouter, habitsRouter } from "./routes";
+import { authRouter, habitsRouter, usersRouter } from "./routes";
 import { errorHandler } from "./middleware";
 
 const PORT = process.env.PORT || 3000;
@@ -27,6 +27,7 @@ app.get("/health", async (req, res) => {
 
 app.use("/api/auth", authRouter);
 app.use("/api/habits", habitsRouter);
+app.use("/api/users", usersRouter);
 app.use(errorHandler);
 
 async function main() {

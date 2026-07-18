@@ -14,7 +14,6 @@ habitsRouter.get(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userId = req.user!.id;
-
       const habits = await habitController.getAllHabits(userId);
 
       res.status(200).json(habits);
@@ -31,7 +30,6 @@ habitsRouter.get(
     try {
       const userId = req.user!.id;
       const habitId = req.params.id as string;
-
       const habit = await habitController.getHabit(userId, habitId);
 
       res.status(200).json(habit);
@@ -48,7 +46,6 @@ habitsRouter.post(
     try {
       const userId = req.user!.id;
       const data = req.body;
-
       const habit = await habitController.createHabit(userId, data);
 
       res.status(201).json(habit);

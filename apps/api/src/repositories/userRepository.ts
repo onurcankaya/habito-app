@@ -1,5 +1,5 @@
 import { pool, type User } from "@habit-tracker/database";
-import type { CreateUserDTO } from "../types";
+import type { CreateUserDTO, PublicUser } from "../types";
 
 async function createUser(userId: string, data: CreateUserDTO): Promise<void> {
   await pool.query(
@@ -17,4 +17,13 @@ async function findUserByEmail(email: string): Promise<User | null> {
   return rows[0] ?? null;
 }
 
-export { createUser, findUserByEmail };
+async function findUserById(userId: string): Promise<PublicUser | null> {
+  const [rows] = await pool.query<User[]>(
+    "SELECT id, email, first_name, last_name FROM users WHERE id = ?",
+    [userId],
+  );
+
+  return rows[0] ?? null;
+}
+
+export { createUser, findUserByEmail, findUserById };
