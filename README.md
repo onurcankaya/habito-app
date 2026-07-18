@@ -9,6 +9,22 @@ POST /api/auth/register
 POST /api/auth/login
 ```
 
+### Users API
+
+```bash
+GET /api/users/me
+```
+
+### Categories API
+
+```bash
+GET /api/categories
+GET /api/categories/:id
+POST /api/categories
+PATCH /api/categories/:id
+DELETE /api/categories/:id
+```
+
 ### Habits API
 
 ```bash

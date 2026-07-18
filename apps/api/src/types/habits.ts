@@ -1,5 +1,4 @@
 export type CreateHabitDTO = {
-  id: string;
   title: string;
   description: string | null;
   frequency: "daily" | "weekly";

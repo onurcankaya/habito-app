@@ -18,4 +18,5 @@ export const pool = mysql.createPool({
   dateStrings: true,
 });
 
+export type { QueryError } from "mysql2";
 export * from "./types";
