@@ -9,10 +9,10 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
-  const JWT = authHeader.split(" ")[1];
+  const token = authHeader.split(" ")[1];
 
   try {
-    const payload = jwt.verify(JWT, requireEnv("JWT_SECRET"));
+    const payload = jwt.verify(token, requireEnv("JWT_SECRET"));
 
     req.user = { id: payload.sub as string };
 

@@ -17,11 +17,11 @@ async function registerUser(data: RegisterUserDTO) {
     throw new Error("Failed to create user");
   }
 
-  const JWT = jwt.sign({ sub: user.id }, requireEnv("JWT_SECRET"), {
+  const token = jwt.sign({ sub: user.id }, requireEnv("JWT_SECRET"), {
     expiresIn: "7d",
   });
 
-  return JWT;
+  return token;
 }
 
 async function loginUser(data: LoginUserDTO) {
@@ -40,11 +40,11 @@ async function loginUser(data: LoginUserDTO) {
     throw new Error("Invalid credentials");
   }
 
-  const JWT = jwt.sign({ sub: user.id }, requireEnv("JWT_SECRET"), {
+  const token = jwt.sign({ sub: user.id }, requireEnv("JWT_SECRET"), {
     expiresIn: "7d",
   });
 
-  return JWT;
+  return token;
 }
 
 export { registerUser, loginUser };

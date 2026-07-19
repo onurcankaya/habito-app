@@ -5,13 +5,13 @@ const authRouter = express.Router();
 
 authRouter.post("/register", async (req: Request, res: Response) => {
   try {
-    const JWT = await authController.registerUser({
+    const token = await authController.registerUser({
       email: req.body.email,
       password: req.body.password,
       first_name: req.body.first_name,
       last_name: req.body.last_name,
     });
-    res.status(201).json({ token: JWT });
+    res.status(201).json({ token });
   } catch (error) {
     res.status(400).json({ error: (error as Error).message });
   }
@@ -19,12 +19,12 @@ authRouter.post("/register", async (req: Request, res: Response) => {
 
 authRouter.post("/login", async (req: Request, res: Response) => {
   try {
-    const JWT = await authController.loginUser({
+    const token = await authController.loginUser({
       email: req.body.email,
       password: req.body.password,
     });
 
-    res.status(200).json({ token: JWT });
+    res.status(200).json({ token });
   } catch (error) {
     res.status(400).json({ error: (error as Error).message });
   }
