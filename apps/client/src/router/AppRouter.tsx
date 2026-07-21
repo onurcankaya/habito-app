@@ -9,24 +9,26 @@ import {
   HabitPage,
   CategoriesPage,
   CategoryPage,
-} from "../pages";
-import ProtectedRoute from "./ProtectedRoute";
-import AuthLayout from "../layouts/AuthLayout";
+} from "@/pages";
+import ProtectedRoute from "@/router/ProtectedRoute";
+import { AuthLayout, PageLayout } from "@/layouts";
 
 export default function AppRouter() {
   return (
     <Routes>
       <Route element={<ProtectedRoute />}>
-        <Route path="/" element={<HomePage />} />
+        <Route element={<PageLayout />}>
+          <Route path="/" element={<HomePage />} />
 
-        <Route path="activities" element={<ActivitiesPage />} />
-        <Route path="activities/:id" element={<ActivityPage />} />
+          <Route path="activities" element={<ActivitiesPage />} />
+          <Route path="activities/:id" element={<ActivityPage />} />
 
-        <Route path="habits" element={<HabitsPage />} />
-        <Route path="habits/:id" element={<HabitPage />} />
+          <Route path="habits" element={<HabitsPage />} />
+          <Route path="habits/:id" element={<HabitPage />} />
 
-        <Route path="categories" element={<CategoriesPage />} />
-        <Route path="categories/:id" element={<CategoryPage />} />
+          <Route path="categories" element={<CategoriesPage />} />
+          <Route path="categories/:id" element={<CategoryPage />} />
+        </Route>
       </Route>
 
       <Route element={<AuthLayout />}>

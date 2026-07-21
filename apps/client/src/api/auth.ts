@@ -1,11 +1,8 @@
 import type { AxiosError } from "axios";
-import { apiClient } from "./client";
-import { ApiError } from "../utils/errors";
-import type {
-  RegisterUserRequest,
-  LoginUserRequest,
-  AuthResponse,
-} from "../types/auth";
+import { apiClient } from "@/api/client";
+import { ApiError } from "@/utils/errors";
+import type { RegisterUserRequest, LoginUserRequest } from "@/lib/schemas/auth";
+import type { AuthResponse } from "@/types/auth";
 
 export const authApi = {
   /**
