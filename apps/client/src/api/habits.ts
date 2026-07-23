@@ -1,15 +1,15 @@
 import type { AxiosError } from "axios";
 import { apiClient } from "@/api";
 import { ApiError } from "@/utils/errors";
-import type { UserResponse } from "@/types";
+import type { HabitsResponse } from "@/types";
 
-export const userApi = {
+export const habitsApi = {
   /**
-   * Fetch authenticated user
+   * Fetch all habits
    */
-  async fetchUser(): Promise<UserResponse> {
+  async fetchHabits(): Promise<HabitsResponse> {
     try {
-      const response = await apiClient.get<UserResponse>("/users/me");
+      const response = await apiClient.get<HabitsResponse>("/habits");
 
       return response.data;
     } catch (error) {
@@ -17,7 +17,7 @@ export const userApi = {
       const errorData = axiosError.response?.data as { error?: string };
 
       throw new ApiError(
-        errorData?.error || "Failed to fetch user",
+        errorData?.error || "Failed to fetch habits",
         axiosError.response?.status,
         axiosError.response?.data,
       );

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { userApi } from "@/api/user";
+import { userApi } from "@/api";
 
 const QUERY_KEY = "user";
 

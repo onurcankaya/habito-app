@@ -1,19 +1,21 @@
 import type { AxiosError } from "axios";
 import { apiClient } from "@/api";
 import { ApiError } from "@/utils/errors";
-import type { RegisterUserRequest, LoginUserRequest } from "@/lib/schemas/auth";
-import type { AuthResponse } from "@/types";
+import type {
+  Activity,
+  FetchActivitiesResponse,
+  CreateActivityRequest,
+  CreateActivityResponse,
+} from "@/types";
 
-export const authApi = {
+export const activitiesApi = {
   /**
-   * Register new user
+   * Fetch all activities
    */
-  async registerUser(data: RegisterUserRequest): Promise<AuthResponse> {
+  async fetchActivities(): Promise<FetchActivitiesResponse> {
     try {
-      const response = await apiClient.post<AuthResponse>(
-        "/auth/register",
-        data,
-      );
+      const response =
+        await apiClient.get<FetchActivitiesResponse>("/activities");
 
       return response.data;
     } catch (error) {
@@ -21,7 +23,7 @@ export const authApi = {
       const errorData = axiosError.response?.data as { error?: string };
 
       throw new ApiError(
-        errorData?.error || "Failed to create user",
+        errorData?.error || "Failed to fetch activities",
         axiosError.response?.status,
         axiosError.response?.data,
       );
@@ -29,19 +31,23 @@ export const authApi = {
   },
 
   /**
-   * Login user
+   * Create new activity
    */
-  async loginUser(data: LoginUserRequest): Promise<AuthResponse> {
+  async createActivity(
+    data: CreateActivityRequest,
+  ): Promise<CreateActivityResponse> {
     try {
-      const response = await apiClient.post<AuthResponse>("/auth/login", data);
+      const response = await apiClient.post<CreateActivityResponse>(
+        "/activities",
+        data,
+      );
 
       return response.data;
     } catch (error) {
       const axiosError = error as AxiosError;
       const errorData = axiosError.response?.data as { error?: string };
-
       throw new ApiError(
-        errorData?.error || "Failed to log in user",
+        errorData?.error || "Failed to create activity",
         axiosError.response?.status,
         axiosError.response?.data,
       );
