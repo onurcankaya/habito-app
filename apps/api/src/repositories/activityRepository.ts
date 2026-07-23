@@ -3,7 +3,7 @@ import type { CreateActivityDTO } from "../types";
 
 async function getAllActivities(userId: string): Promise<CompletedActivity[]> {
   const [rows] = await pool.query<CompletedActivity[]>(
-    "SELECT ca.id, ca.notes, ca.completed_at, h.title AS habit_title FROM completed_activities ca JOIN habits h ON ca.habit_id = h.id WHERE ca.user_id = ?",
+    "SELECT ca.id, ca.notes, ca.completed_at, h.id AS habit_id, h.title AS habit_title, c.title AS category_title FROM completed_activities ca JOIN habits h ON ca.habit_id = h.id JOIN categories c ON h.category_id = c.id WHERE ca.user_id = ?",
     [userId],
   );
 
