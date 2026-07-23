@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppTitle } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/hooks/useUser";
 import { removeToken } from "@/utils/token";
@@ -24,10 +25,10 @@ export default function AppHeader() {
   return (
     <div className="h-[80px] flex items-center justify-between border-b px-6">
       <div className="w-[100px]">
-        <h4>{isLoading ? "..." : user?.first_name}</h4>
+        <h5 className="text-left">{isLoading ? "..." : user?.first_name}</h5>
       </div>
 
-      <h2>Habit Tracker</h2>
+      <AppTitle />
 
       <div className="w-[100px]">
         <Button

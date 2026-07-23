@@ -22,7 +22,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           className={`w-full bg-background border ${
             error ? "border-destructive" : "border-input"
-          } rounded px-4 py-3 text-base text-foreground font-bold focus:border-ring outline-none transition-colors ${className}`}
+          } rounded-md px-3 py-2.5 text-sm text-foreground font-semibold placeholder:font-normal focus:border-ring outline-none transition-colors ${className}`}
           {...props}
         />
         {error && <p className="text-destructive text-xs">{error}</p>}

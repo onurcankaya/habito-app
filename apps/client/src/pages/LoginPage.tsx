@@ -6,6 +6,7 @@ import { loginUserSchema, type LoginUserRequest } from "@/lib/schemas/auth";
 import { useLoginUser } from "@/hooks/useAuth";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 export default function LoginPage() {
   const [loginUserError, setLoginUserError] = useState<Error | null>();
@@ -37,17 +38,21 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
+    <div className="space-y-8">
       {loginUserError && (
         <p className="text-destructive text-sm">{loginUserError.message}</p>
       )}
 
-      <h2 className="mb-4">Login</h2>
+      <div className="flex flex-col items-start">
+        <h2>Welcome back</h2>
+        <p className="body-2">Log in to keep your streaks alive.</p>
+      </div>
 
       <form onSubmit={handleSubmit(handleLoginUser)} className="space-y-6">
         <Input
           id="email"
           label="Email"
+          placeholder="you@email.com"
           {...register("email")}
           error={errors.email?.message}
         />
@@ -55,6 +60,7 @@ export default function LoginPage() {
         <Input
           id="password"
           label="Password"
+          placeholder="********"
           type="password"
           {...register("password")}
           error={errors.password?.message}
@@ -62,12 +68,11 @@ export default function LoginPage() {
 
         <div className="flex flex-col space-y-4">
           <Button type="submit" variant="primary" disabled={isPending}>
-            Login
+            Log in
           </Button>
 
-          <span className="text-xs">
-            Don't have a user?{" "}
-            <Link to="/register">Click here to sign up.</Link>
+          <span className="body-3">
+            Don't have an account? <Link to="/register">Sign up</Link>
           </span>
         </div>
       </form>

@@ -133,9 +133,10 @@ h1,
 h2,
 h3,
 h4,
-h5 {
+h5,
+h6 {
   font-family: var(--heading);
-  font-weight: 600;
+  font-weight: 800;
 
   color: var(--text-h);
 }
@@ -185,8 +186,50 @@ h5 {
   }
 }
 
+h6 {
+  font-size: 14px;
+  line-height: 120%;
+  letter-spacing: -0.1px;
+  color: var(--ring);
+  text-transform: uppercase;
+  @media (max-width: 1024px) {
+    font-size: 13px;
+  }
+}
+
 p {
   margin: 0;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.body-1,
+.body-2 {
+  color: whitesmoke;
+}
+
+.body-3,
+.body-4 {
+  color: var(--text);
+}
+
+.body-1 {
+  font-size: 16px;
+}
+
+.body-2 {
+  font-size: 14px;
+}
+
+.body-3 {
+  font-size: 12px;
+}
+
+.body-4 {
+  font-size: 11px;
 }
 
 @theme inline {
@@ -239,8 +282,8 @@ p {
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: #c084fc;
+  --primary-foreground: #16171d;
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
