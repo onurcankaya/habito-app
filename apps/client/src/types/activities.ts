@@ -10,6 +10,8 @@ export type Activity = {
 
 export type FetchActivitiesResponse = Activity[];
 
+export type FetchActivityResponse = Activity | null;
+
 export type CreateActivityRequest = {
   habit_id: string;
   completed_at: string;

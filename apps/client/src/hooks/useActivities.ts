@@ -15,7 +15,17 @@ export function useActivities() {
 }
 
 /**
- * Hook to create new activity
+ * Hook to fetch an activity by id
+ */
+export function useActivity(activityId: string) {
+  return useQuery({
+    queryKey: [QUERY_KEY, activityId],
+    queryFn: () => activitiesApi.fetchActivity(activityId),
+  });
+}
+
+/**
+ * Hook to create an activity
  */
 export function useCreateActivity() {
   const queryClient = useQueryClient();
@@ -24,6 +34,19 @@ export function useCreateActivity() {
     mutationFn: (
       data: CreateActivityRequest,
     ): Promise<CreateActivityResponse> => activitiesApi.createActivity(data),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY] }),
+  });
+}
+
+/**
+ * Hook to delete an activity
+ */
+export function useDeleteActivity() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (activityId: string) =>
+      activitiesApi.deleteActivity(activityId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY] });
     },
