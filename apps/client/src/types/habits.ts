@@ -8,7 +8,11 @@ export type Habit = {
   user_id: string;
   category_id: string;
   category_title: string;
-  is_completed?: boolean;
+};
+
+export type HabitWithCompletion = Habit & {
+  is_completed: boolean;
+  activity_id: string | null;
 };
 
 export type HabitsResponse = Habit[];
