@@ -6,7 +6,6 @@ import { loginUserSchema, type LoginUserRequest } from "@/lib/schemas/auth";
 import { useLoginUser } from "@/hooks/useAuth";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 export default function LoginPage() {
   const [loginUserError, setLoginUserError] = useState<Error | null>();
@@ -29,7 +28,7 @@ export default function LoginPage() {
         navigate("/");
       },
       onError: (error) => {
-        console.error("Failed to log in user:", error);
+        console.error("Failed to log in user: ", error);
         setLoginUserError(
           error instanceof Error ? error : new Error("Failed to log in user"),
         );
