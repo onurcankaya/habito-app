@@ -8,4 +8,9 @@ export type {
   CreateActivityResponse,
 } from "./activities";
 export type { Category, CategoriesResponse } from "./categories";
-export type { Habit, HabitWithCompletion, HabitsResponse } from "./habits";
+export type {
+  Habit,
+  HabitWithCompletion,
+  FetchHabitsResponse,
+  CreateHabitResponse,
+} from "./habits";

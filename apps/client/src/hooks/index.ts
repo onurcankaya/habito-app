@@ -7,4 +7,4 @@ export {
   useDeleteActivity,
 } from "./useActivities";
 export { useCategories } from "./useCategories";
-export { useHabits } from "./useHabits";
+export { useHabits, useCreateHabit } from "./useHabits";

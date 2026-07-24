@@ -15,4 +15,6 @@ export type HabitWithCompletion = Habit & {
   activity_id: string | null;
 };
 
-export type HabitsResponse = Habit[];
+export type FetchHabitsResponse = Habit[];
+
+export type CreateHabitResponse = Habit;
