@@ -27,7 +27,7 @@ export default function HabitCard({
 
           <div className="flex flex-col items-start gap-1">
             <p className="body-2 font-bold">{habit.title}</p>
-            <p className="body-3">{habit.description}</p>
+            {habit.description && <p className="body-3">{habit.description}</p>}
           </div>
         </div>
 

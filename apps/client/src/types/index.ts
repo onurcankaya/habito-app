@@ -7,7 +7,11 @@ export type {
   CreateActivityRequest,
   CreateActivityResponse,
 } from "./activities";
-export type { Category, CategoriesResponse } from "./categories";
+export type {
+  Category,
+  FetchCategoriesResponse,
+  CreateCategoryResponse,
+} from "./categories";
 export type {
   Habit,
   HabitWithCompletion,

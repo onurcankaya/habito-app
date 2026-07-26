@@ -5,4 +5,6 @@ export type Category = {
   created_at: string;
 };
 
-export type CategoriesResponse = Category[];
+export type FetchCategoriesResponse = Category[];
+
+export type CreateCategoryResponse = Category;
