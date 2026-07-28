@@ -1,4 +1,4 @@
-import { type ButtonHTMLAttributes } from "react";
+import { forwardRef, type ButtonHTMLAttributes } from "react";
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?:
@@ -11,37 +11,39 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: "sm" | "md" | "lg";
 };
 
-export function Button({
-  variant = "primary",
-  size = "md",
-  className = "",
-  children,
-  ...props
-}: ButtonProps) {
-  const baseStyles =
-    "rounded-full font-bold transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed";
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    { variant = "primary", size = "md", className = "", children, ...props },
+    ref,
+  ) => {
+    const baseStyles =
+      "rounded-full font-bold transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed";
 
-  const variants = {
-    primary: "bg-primary hover:bg-primary/90 text-primary-foreground",
-    secondary: "bg-secondary hover:bg-secondary/80 text-secondary-foreground",
-    destructive: "bg-destructive hover:bg-destructive/90 text-white",
-    outline: "border border-border text-foreground hover:bg-muted",
-    ghost: "text-foreground hover:bg-muted",
-    light: "text-foreground bg-muted hover:bg-muted/80",
-  };
+    const variants = {
+      primary: "bg-primary hover:bg-primary/90 text-primary-foreground",
+      secondary: "bg-secondary hover:bg-secondary/80 text-secondary-foreground",
+      destructive: "bg-destructive hover:bg-destructive/90 text-white",
+      outline: "border border-border text-foreground hover:bg-muted",
+      ghost: "text-foreground hover:bg-muted",
+      light: "text-foreground bg-muted hover:bg-muted/80",
+    };
 
-  const sizes = {
-    sm: "px-4 py-2 text-xs",
-    md: "px-6 py-2.5 text-sm",
-    lg: "px-8 py-3 text-base",
-  };
+    const sizes = {
+      sm: "px-4 py-2 text-xs",
+      md: "px-6 py-2.5 text-sm",
+      lg: "px-8 py-3 text-base",
+    };
 
-  return (
-    <button
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-}
+    return (
+      <button
+        ref={ref}
+        className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  },
+);
+
+Button.displayName = "Button";
