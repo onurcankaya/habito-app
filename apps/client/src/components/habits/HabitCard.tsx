@@ -49,10 +49,8 @@ export default function HabitCard({
           <Badge label={habit.category_title} />
 
           <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Button size="sm" variant="ghost">
-                <MenuIcon className="h-4 w-4" />
-              </Button>
+            <DropdownMenuTrigger render={<Button size="sm" variant="ghost" />}>
+              <MenuIcon className="h-4 w-4" />
             </DropdownMenuTrigger>
 
             <DropdownMenuContent>

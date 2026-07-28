@@ -6,5 +6,9 @@ export {
   useCreateActivity,
   useDeleteActivity,
 } from "./useActivities";
-export { useCategories, useCreateCategory } from "./useCategories";
+export {
+  useCategories,
+  useCreateCategory,
+  useDeleteCategory,
+} from "./useCategories";
 export { useHabits, useCreateHabit, useDeleteHabit } from "./useHabits";

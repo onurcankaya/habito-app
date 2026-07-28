@@ -26,3 +26,16 @@ export function useCreateCategory() {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY] }),
   });
 }
+
+/**
+ * Hook to delete a category
+ */
+export function useDeleteCategory() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (categoryId: string) =>
+      categoriesApi.deleteCategory(categoryId),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY] }),
+  });
+}

@@ -56,10 +56,8 @@ export default function CreateCategoryDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
-        <Button size="sm" variant="primary">
-          + New category
-        </Button>
+      <DialogTrigger render={<Button size="sm" variant="primary" />}>
+        + New category
       </DialogTrigger>
 
       <DialogContent>
@@ -97,15 +95,17 @@ export default function CreateCategoryDialog() {
               Save category
             </Button>
 
-            <DialogClose>
-              <Button
-                type="button"
-                size="sm"
-                variant="outline"
-                disabled={isCreatingCategory}
-              >
-                Cancel
-              </Button>
+            <DialogClose
+              render={
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  disabled={isCreatingCategory}
+                />
+              }
+            >
+              Cancel
             </DialogClose>
           </DialogFooter>
         </form>

@@ -47,4 +47,22 @@ export const categoriesApi = {
       );
     }
   },
+
+  /**
+   * Delete a category
+   */
+  async deleteCategory(categoryId: string): Promise<void> {
+    try {
+      await apiClient.delete(`/categories/${categoryId}`);
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      const errorData = axiosError.response?.data as { error?: string };
+
+      throw new ApiError(
+        errorData?.error || "Failed to delete category",
+        axiosError.response?.status,
+        axiosError.response?.data,
+      );
+    }
+  },
 };

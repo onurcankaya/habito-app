@@ -11,7 +11,7 @@ function PageWrapper() {
 
 export default function PageLayout() {
   return (
-    <div className="h-screen">
+    <div className="h-full mb-20">
       <AppHeader />
       <PageWrapper />
     </div>

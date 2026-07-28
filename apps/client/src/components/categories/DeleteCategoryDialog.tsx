@@ -9,32 +9,36 @@ import {
   DialogClose,
 } from "@/components/ui";
 import { ErrorMessage } from "@/components/shared";
-import { useDeleteHabit } from "@/hooks";
+import { useDeleteCategory } from "@/hooks";
 
-type DeleteHabitDialogProps = {
-  habitId: string;
+type DeleteCategoryDialogProps = {
+  categoryId: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 };
 
-export default function DeleteHabitDialog({
-  habitId,
+export default function DeleteCategoryDialog({
+  categoryId,
   open,
   onOpenChange,
-}: DeleteHabitDialogProps) {
-  const [deleteHabitError, setDeleteHabitError] = useState<Error | null>();
+}: DeleteCategoryDialogProps) {
+  const [deleteCategoryError, setDeleteCategoryError] =
+    useState<Error | null>();
 
-  const { mutate: deleteHabit, isPending: isDeletingHabit } = useDeleteHabit();
+  const { mutate: deleteCategory, isPending: isDeletingCategory } =
+    useDeleteCategory();
 
-  function handleDeleteHabit() {
-    deleteHabit(habitId, {
+  function handleDeleteCategory() {
+    deleteCategory(categoryId, {
       onSuccess: () => {
         onOpenChange(false);
       },
       onError: (error) => {
-        console.error("Failed to delete habit: ", error);
-        setDeleteHabitError(
-          error instanceof Error ? error : new Error("Failed to delete habit"),
+        console.error("Failed to delete category: ", error);
+        setDeleteCategoryError(
+          error instanceof Error
+            ? error
+            : new Error("Failed to delete category"),
         );
       },
     });
@@ -44,13 +48,13 @@ export default function DeleteHabitDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete Habit</DialogTitle>
+          <DialogTitle>Delete Category</DialogTitle>
         </DialogHeader>
 
-        {deleteHabitError && <ErrorMessage error={deleteHabitError} />}
+        {deleteCategoryError && <ErrorMessage error={deleteCategoryError} />}
 
         <p className="body-2">
-          Are you sure you want to delete this habit? <br />
+          Are you sure you want to delete this category? <br />
           This action cannot be undone.
         </p>
 
@@ -58,8 +62,8 @@ export default function DeleteHabitDialog({
           <Button
             size="sm"
             variant="destructive"
-            onClick={handleDeleteHabit}
-            disabled={isDeletingHabit}
+            onClick={handleDeleteCategory}
+            disabled={isDeletingCategory}
           >
             Delete
           </Button>
@@ -70,7 +74,7 @@ export default function DeleteHabitDialog({
                 type="button"
                 size="sm"
                 variant="outline"
-                disabled={isDeletingHabit}
+                disabled={isDeletingCategory}
               />
             }
           >

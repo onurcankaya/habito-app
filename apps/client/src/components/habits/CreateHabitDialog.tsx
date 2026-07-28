@@ -59,10 +59,8 @@ export default function CreateHabitDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
-        <Button size="sm" variant="primary">
-          + New Habit
-        </Button>
+      <DialogTrigger render={<Button size="sm" variant="primary" />}>
+        + New Habit
       </DialogTrigger>
 
       <DialogContent>
@@ -119,15 +117,17 @@ export default function CreateHabitDialog() {
               Save habit
             </Button>
 
-            <DialogClose>
-              <Button
-                type="button"
-                size="sm"
-                variant="outline"
-                disabled={isCreatingHabit}
-              >
-                Cancel
-              </Button>
+            <DialogClose
+              render={
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  disabled={isCreatingHabit}
+                />
+              }
+            >
+              Cancel
             </DialogClose>
           </DialogFooter>
         </form>

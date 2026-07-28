@@ -1,5 +1,16 @@
-import { Card, CardContent } from "@/components/ui";
+import { useState } from "react";
+import { MoreVertical as MenuIcon, Trash2 as DeleteIcon } from "lucide-react";
+import {
+  Button,
+  Card,
+  CardContent,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui";
 import { Badge } from "@/components/shared";
+import { DeleteCategoryDialog } from "@/components/categories";
 import type { Category } from "@/types";
 
 type CategoryCardProps = {
@@ -7,6 +18,8 @@ type CategoryCardProps = {
 };
 
 export default function CategoryCard({ category }: CategoryCardProps) {
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+
   return (
     <Card>
       <CardContent className="flex justify-between items-center">
@@ -19,7 +32,34 @@ export default function CategoryCard({ category }: CategoryCardProps) {
           </div>
         </div>
 
-        <Badge label={category.title} />
+        <div className="flex items-center gap-2">
+          <Badge label={category.title} />
+
+          <DropdownMenu>
+            <DropdownMenuTrigger render={<Button size="sm" variant="ghost" />}>
+              <MenuIcon className="h-4 w-4" />
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent>
+              <DropdownMenuItem
+                variant="destructive"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setDeleteDialogOpen(true);
+                }}
+              >
+                <DeleteIcon className="h-4 w-4" />
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <DeleteCategoryDialog
+            categoryId={category.id}
+            open={deleteDialogOpen}
+            onOpenChange={setDeleteDialogOpen}
+          />
+        </div>
       </CardContent>
     </Card>
   );
