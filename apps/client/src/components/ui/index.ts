@@ -11,6 +11,12 @@ import {
   DialogFooter,
   DialogClose,
 } from "./dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./dropdown-menu";
 import { Input } from "./input";
 import { Select } from "./select";
 
@@ -30,6 +36,10 @@ export {
   DialogTrigger,
   DialogFooter,
   DialogClose,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
   Input,
   Select,
 };
