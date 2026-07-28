@@ -320,3 +320,13 @@ a {
     @apply font-sans;
   }
 }
+
+/* custom styles */
+
+[data-slot="dialog-trigger"] {
+  cursor: pointer;
+}
+
+[data-slot="dropdown-menu-content"] {
+  padding: 0.5rem;
+}

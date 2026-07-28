@@ -27,3 +27,17 @@ export function useCreateHabit() {
     },
   });
 }
+
+/**
+ * Hook to delete a habit
+ */
+export function useDeleteHabit() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (habitId: string) => habitsApi.deleteHabit(habitId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY] });
+    },
+  });
+}

@@ -44,4 +44,22 @@ export const habitsApi = {
       );
     }
   },
+
+  /**
+   * Delete a habit
+   */
+  async deleteHabit(habitId: string): Promise<void> {
+    try {
+      await apiClient.delete(`/habits/${habitId}`);
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      const errorData = axiosError.response?.data as { error?: string };
+
+      throw new ApiError(
+        errorData?.error || "Failed to delete habit",
+        axiosError.response?.status,
+        axiosError.response?.data,
+      );
+    }
+  },
 };
