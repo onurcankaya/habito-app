@@ -1,8 +1,7 @@
 import { useMemo } from "react";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, Checkbox } from "@/components/ui";
+import { Badge, ErrorMessage, QueryState } from "@/components/shared";
 import { GreetingSection } from "@/components/dashboard";
-import { Badge } from "@/components/shared";
 import {
   useActivities,
   useCreateActivity,
@@ -17,14 +16,12 @@ export default function HomePage() {
     data: habits,
     isPending: isLoadingHabits,
     error: habitsError,
-    refetch: refetchHabits,
   } = useHabits();
 
   const {
     data: activities,
     isPending: isLoadingActivities,
     error: activitiesError,
-    refetch: refetchActivities,
   } = useActivities();
 
   const {
@@ -33,7 +30,11 @@ export default function HomePage() {
     error: createActivityError,
   } = useCreateActivity();
 
-  const { mutate: deleteActivity } = useDeleteActivity();
+  const {
+    mutate: deleteActivity,
+    isPending: isLoadingDeleteActivity,
+    error: deleteActivityError,
+  } = useDeleteActivity();
 
   const todaysHabits = useMemo(() => {
     if (!habits) return [];
@@ -103,11 +104,14 @@ export default function HomePage() {
           <h5 className="text-left">Today's Habits</h5>
         </div>
 
-        {isLoadingHabits ? (
-          <Card>
-            <p className="body-3">Loading....</p>
-          </Card>
-        ) : (
+        {createActivityError && <ErrorMessage error={createActivityError} />}
+        {deleteActivityError && <ErrorMessage error={deleteActivityError} />}
+
+        <QueryState
+          isLoading={isLoadingHabits}
+          error={habitsError}
+          queryKeys={["habits"]}
+        >
           <div className="space-y-4">
             {todaysHabits.map((habit: HabitWithCompletion) => (
               <Card key={habit.id}>
@@ -117,6 +121,9 @@ export default function HomePage() {
                       id={habit.id}
                       checked={habit.is_completed}
                       onCheckedChange={() => handleToggleHabitComplete(habit)}
+                      disabled={
+                        isLoadingCreateActivity || isLoadingDeleteActivity
+                      }
                     />
                     <div className="flex flex-col items-start gap-1">
                       <p className="body-2 font-bold">{habit.title}</p>
@@ -128,19 +135,19 @@ export default function HomePage() {
               </Card>
             ))}
           </div>
-        )}
+        </QueryState>
       </div>
 
       <div>
-        <div className="mb-6">
+        <div className="mb-4">
           <h5 className="text-left">Activity Log</h5>
         </div>
 
-        {isLoadingActivities ? (
-          <Card>
-            <p className="body-3">Loading....</p>
-          </Card>
-        ) : (
+        <QueryState
+          isLoading={isLoadingActivities}
+          error={activitiesError}
+          queryKeys={["activities"]}
+        >
           <div className="space-y-8">
             {Object.entries(activitiesByDate).map(
               ([activityDate, activities]) => {
@@ -172,7 +179,7 @@ export default function HomePage() {
               },
             )}
           </div>
-        )}
+        </QueryState>
       </div>
     </div>
   );

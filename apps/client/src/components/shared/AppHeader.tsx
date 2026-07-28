@@ -25,7 +25,7 @@ export default function AppHeader() {
   return (
     <div className="h-[80px] flex items-center justify-between border-b px-6">
       <div className="w-[100px]">
-        <h5 className="text-left">{isLoading ? "..." : user?.first_name}</h5>
+        <h4 className="text-left">{isLoading ? "..." : user?.first_name}</h4>
       </div>
 
       <AppTitle />

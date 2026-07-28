@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  Alert,
-  AlertDescription,
   Button,
   Dialog,
   DialogContent,
@@ -15,6 +13,7 @@ import {
   Input,
   Select,
 } from "@/components/ui";
+import { ErrorMessage } from "@/components/shared";
 import { useCategories, useCreateHabit } from "@/hooks";
 import {
   createHabitSchema,
@@ -71,11 +70,7 @@ export default function CreateHabitDialog() {
           <DialogTitle>Create Habit</DialogTitle>
         </DialogHeader>
 
-        {createHabitError && (
-          <Alert variant="destructive">
-            <AlertDescription>{createHabitError.message}</AlertDescription>
-          </Alert>
-        )}
+        {createHabitError && <ErrorMessage error={createHabitError} />}
 
         <form onSubmit={handleSubmit(handleCreateHabit)} className="space-y-4">
           <Input

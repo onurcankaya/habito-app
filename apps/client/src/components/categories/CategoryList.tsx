@@ -1,3 +1,4 @@
+import { QueryState } from "@/components/shared";
 import { CategoryCard, CreateCategoryDialog } from "@/components/categories";
 import { useCategories } from "@/hooks";
 
@@ -6,21 +7,26 @@ export default function CategoryList() {
     data: categories,
     isPending: isLoadingCategories,
     error: fetchCategoriesError,
-    refetch: refetchCategories,
   } = useCategories();
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between mb-6">
+      <div className="flex justify-between">
         <h1 className="text-left">Categories</h1>
         <CreateCategoryDialog />
       </div>
 
-      <div className="space-y-3">
-        {categories?.map((category) => (
-          <CategoryCard key={category.id} category={category} />
-        ))}
-      </div>
+      <QueryState
+        isLoading={isLoadingCategories}
+        error={fetchCategoriesError}
+        queryKeys={["categories"]}
+      >
+        <div className="space-y-3">
+          {categories?.map((category) => (
+            <CategoryCard key={category.id} category={category} />
+          ))}
+        </div>
+      </QueryState>
     </div>
   );
 }

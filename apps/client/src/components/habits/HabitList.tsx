@@ -1,3 +1,4 @@
+import { QueryState } from "@/components/shared";
 import { CreateHabitDialog, HabitCard } from "@/components/habits";
 import { useHabits } from "@/hooks";
 
@@ -6,7 +7,6 @@ export default function HabitList() {
     data: habits,
     isPending: isLoadingHabits,
     error: fetchHabitsError,
-    refetch: refetchHabits,
   } = useHabits();
 
   return (
@@ -16,11 +16,17 @@ export default function HabitList() {
         <CreateHabitDialog />
       </div>
 
-      <div className="space-y-3">
-        {habits?.map((habit) => (
-          <HabitCard key={habit.id} mode="habits" habit={habit} />
-        ))}
-      </div>
+      <QueryState
+        isLoading={isLoadingHabits}
+        error={fetchHabitsError}
+        queryKeys={["habits"]}
+      >
+        <div className="space-y-3">
+          {habits?.map((habit) => (
+            <HabitCard key={habit.id} mode="habits" habit={habit} />
+          ))}
+        </div>
+      </QueryState>
     </div>
   );
 }
