@@ -40,8 +40,8 @@ export default function CreateCategoryDialog() {
   function handleCreateCategory(createCategoryPayload: CreateCategoryRequest) {
     createCategory(createCategoryPayload, {
       onSuccess: () => {
-        reset();
         setOpen(false);
+        reset();
       },
       onError: (error) => {
         console.error("Failed to create category: ", error);

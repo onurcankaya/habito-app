@@ -12,4 +12,9 @@ export {
   useUpdateCategory,
   useDeleteCategory,
 } from "./useCategories";
-export { useHabits, useCreateHabit, useDeleteHabit } from "./useHabits";
+export {
+  useHabits,
+  useCreateHabit,
+  useUpdateHabit,
+  useDeleteHabit,
+} from "./useHabits";

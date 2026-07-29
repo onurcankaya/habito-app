@@ -7,67 +7,78 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
   DialogFooter,
   DialogClose,
   Input,
   Select,
 } from "@/components/ui";
 import { CategorySelector, ErrorMessage } from "@/components/shared";
-import { useCreateHabit } from "@/hooks";
+import { useUpdateHabit } from "@/hooks";
 import {
-  createHabitSchema,
-  type CreateHabitRequest,
+  updateHabitSchema,
+  type UpdateHabitRequest,
 } from "@/lib/schemas/habit";
+import type { Habit } from "@/types";
 
-export default function CreateHabitDialog() {
-  const [open, setOpen] = useState(false);
-  const [createHabitError, setCreateHabitError] = useState<Error | null>();
+type EditHabitDialogProps = {
+  habit: Habit;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+};
+
+export default function EditHabitDialog({
+  habit,
+  open,
+  onOpenChange,
+}: EditHabitDialogProps) {
+  const [updateHabitError, setUpdateHabitError] = useState<Error | null>();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
-  } = useForm<CreateHabitRequest>({
-    resolver: zodResolver(createHabitSchema),
+  } = useForm<UpdateHabitRequest>({
+    resolver: zodResolver(updateHabitSchema),
+    defaultValues: {
+      title: habit.title || "",
+      frequency: habit.frequency,
+      category_id: habit.category_id,
+      description: habit.description || "",
+    },
   });
 
-  const { mutate: createHabit, isPending: isCreatingHabit } = useCreateHabit();
+  const { mutate: updateHabit, isPending: isUpdatingHabit } = useUpdateHabit(
+    habit.id,
+  );
 
-  function handleCreateHabit(createHabitPayload: CreateHabitRequest) {
-    createHabit(createHabitPayload, {
+  function handleUpdateHabit(updateHabitPayload: UpdateHabitRequest) {
+    updateHabit(updateHabitPayload, {
       onSuccess: () => {
-        setOpen(false);
-        reset();
+        onOpenChange(false);
       },
       onError: (error) => {
-        console.error("Failed to create habit: ", error);
-        setCreateHabitError(
-          error instanceof Error ? error : new Error("Failed to create habit"),
+        console.error("Failed to update habit: ", error);
+        setUpdateHabitError(
+          error instanceof Error ? error : new Error("Failed to update habit"),
         );
       },
     });
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button size="sm" variant="primary" />}>
-        + New Habit
-      </DialogTrigger>
-
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create Habit</DialogTitle>
+          <DialogTitle>Edit Habit</DialogTitle>
         </DialogHeader>
 
-        {createHabitError && <ErrorMessage error={createHabitError} />}
+        {updateHabitError && <ErrorMessage error={updateHabitError} />}
 
-        <form onSubmit={handleSubmit(handleCreateHabit)} className="space-y-4">
+        <form onSubmit={handleSubmit(handleUpdateHabit)} className="space-y-4">
           <Input
             id="title"
             label="Title"
-            placeholder="e.g. Stretch"
+            placeholder="e.g. Health"
             {...register("title")}
             error={errors.title?.message}
           />
@@ -93,9 +104,10 @@ export default function CreateHabitDialog() {
             {...register("description")}
             error={errors.description?.message}
           />
+
           <DialogFooter className="flex justify-end gap-2">
-            <Button type="submit" size="sm" disabled={isCreatingHabit}>
-              Save habit
+            <Button type="submit" size="sm" disabled={isUpdatingHabit}>
+              Save changes
             </Button>
 
             <DialogClose
@@ -104,7 +116,7 @@ export default function CreateHabitDialog() {
                   type="button"
                   size="sm"
                   variant="outline"
-                  disabled={isCreatingHabit}
+                  disabled={isUpdatingHabit}
                 />
               }
             >

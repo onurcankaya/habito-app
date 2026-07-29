@@ -1,7 +1,10 @@
 import type { AxiosError } from "axios";
 import { apiClient } from "@/api";
 import { ApiError } from "@/utils/errors";
-import type { CreateHabitRequest } from "@/lib/schemas/habit";
+import type {
+  CreateHabitRequest,
+  UpdateHabitRequest,
+} from "@/lib/schemas/habit";
 import type { FetchHabitsResponse, CreateHabitResponse } from "@/types";
 
 export const habitsApi = {
@@ -39,6 +42,24 @@ export const habitsApi = {
 
       throw new ApiError(
         errorData?.error || "Failed to create habit",
+        axiosError.response?.status,
+        axiosError.response?.data,
+      );
+    }
+  },
+
+  /**
+   * Update a habit
+   */
+  async updateHabit(habitId: string, data: UpdateHabitRequest): Promise<void> {
+    try {
+      await apiClient.patch(`/habits/${habitId}`, data);
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      const errorData = axiosError.response?.data as { error?: string };
+
+      throw new ApiError(
+        errorData?.error || "Failed to update habit",
         axiosError.response?.status,
         axiosError.response?.data,
       );

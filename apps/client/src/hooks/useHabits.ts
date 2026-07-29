@@ -1,6 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { habitsApi } from "@/api";
-import type { CreateHabitRequest } from "@/lib/schemas/habit";
+import type {
+  CreateHabitRequest,
+  UpdateHabitRequest,
+} from "@/lib/schemas/habit";
 
 const QUERY_KEY = "habits";
 
@@ -22,6 +25,22 @@ export function useCreateHabit() {
 
   return useMutation({
     mutationFn: (data: CreateHabitRequest) => habitsApi.createHabit(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY] });
+    },
+  });
+}
+
+/**
+ * Hook to update a habit
+ */
+
+export function useUpdateHabit(habitId: string) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: UpdateHabitRequest) =>
+      habitsApi.updateHabit(habitId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY] });
     },

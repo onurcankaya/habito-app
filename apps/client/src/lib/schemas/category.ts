@@ -6,8 +6,8 @@ export const createCategorySchema = z.object({
 });
 
 export const updateCategorySchema = z.object({
-  title: z.string(),
-  description: z.string(),
+  title: z.string().min(1).optional(),
+  description: z.string().optional(),
 });
 
 export type CreateCategoryRequest = z.infer<typeof createCategorySchema>;
