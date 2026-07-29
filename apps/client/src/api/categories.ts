@@ -1,7 +1,10 @@
 import type { AxiosError } from "axios";
 import { apiClient } from "@/api";
 import { ApiError } from "@/utils/errors";
-import type { CreateCategoryRequest } from "@/lib/schemas/category";
+import type {
+  CreateCategoryRequest,
+  UpdateCategoryRequest,
+} from "@/lib/schemas/category";
 import type { FetchCategoriesResponse, CreateCategoryResponse } from "@/types";
 
 export const categoriesApi = {
@@ -42,6 +45,28 @@ export const categoriesApi = {
 
       throw new ApiError(
         errorData?.error || "Failed to create category",
+        axiosError.response?.status,
+        axiosError.response?.data,
+      );
+    }
+  },
+
+  /**
+   * Update a category
+   */
+
+  async updateCategory(
+    categoryId: string,
+    data: UpdateCategoryRequest,
+  ): Promise<void> {
+    try {
+      await apiClient.patch(`/categories/${categoryId}`, data);
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      const errorData = axiosError.response?.data as { error?: string };
+
+      throw new ApiError(
+        errorData?.error || "Failed to update category",
         axiosError.response?.status,
         axiosError.response?.data,
       );

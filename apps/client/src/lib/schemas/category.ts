@@ -5,4 +5,10 @@ export const createCategorySchema = z.object({
   description: z.string(),
 });
 
+export const updateCategorySchema = z.object({
+  title: z.string(),
+  description: z.string(),
+});
+
 export type CreateCategoryRequest = z.infer<typeof createCategorySchema>;
+export type UpdateCategoryRequest = z.infer<typeof updateCategorySchema>;

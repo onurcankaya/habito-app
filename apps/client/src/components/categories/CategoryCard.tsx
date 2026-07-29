@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { MoreVertical as MenuIcon, Trash2 as DeleteIcon } from "lucide-react";
+import {
+  MoreVertical as MenuIcon,
+  Pencil as EditIcon,
+  Trash2 as DeleteIcon,
+} from "lucide-react";
 import {
   Button,
   Card,
@@ -10,7 +14,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui";
 import { Badge } from "@/components/shared";
-import { DeleteCategoryDialog } from "@/components/categories";
+import {
+  EditCategoryDialog,
+  DeleteCategoryDialog,
+} from "@/components/categories";
 import type { Category } from "@/types";
 
 type CategoryCardProps = {
@@ -18,6 +25,7 @@ type CategoryCardProps = {
 };
 
 export default function CategoryCard({ category }: CategoryCardProps) {
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   return (
@@ -40,7 +48,17 @@ export default function CategoryCard({ category }: CategoryCardProps) {
               <MenuIcon className="h-4 w-4" />
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent>
+            <DropdownMenuContent className="space-y-2">
+              <DropdownMenuItem
+                onClick={(e) => {
+                  e.preventDefault();
+                  setEditDialogOpen(true);
+                }}
+              >
+                <EditIcon className="h-4 w-4" />
+                Edit
+              </DropdownMenuItem>
+
               <DropdownMenuItem
                 variant="destructive"
                 onClick={(e) => {
@@ -53,6 +71,12 @@ export default function CategoryCard({ category }: CategoryCardProps) {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+
+          <EditCategoryDialog
+            category={category}
+            open={editDialogOpen}
+            onOpenChange={setEditDialogOpen}
+          />
 
           <DeleteCategoryDialog
             categoryId={category.id}

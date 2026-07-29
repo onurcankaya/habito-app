@@ -9,6 +9,7 @@ export {
 export {
   useCategories,
   useCreateCategory,
+  useUpdateCategory,
   useDeleteCategory,
 } from "./useCategories";
 export { useHabits, useCreateHabit, useDeleteHabit } from "./useHabits";
