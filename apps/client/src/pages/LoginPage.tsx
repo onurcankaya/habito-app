@@ -71,7 +71,10 @@ export default function LoginPage() {
           </Button>
 
           <span className="body-3">
-            Don't have an account? <Link to="/register">Sign up</Link>
+            Don't have an account?{" "}
+            <Link to="/register" className="inline-link">
+              Sign up
+            </Link>
           </span>
         </div>
       </form>

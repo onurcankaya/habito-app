@@ -201,11 +201,6 @@ p {
   margin: 0;
 }
 
-a {
-  color: var(--color-primary);
-  text-decoration: underline;
-}
-
 .body-1,
 .body-2 {
   color: whitesmoke;
@@ -230,6 +225,11 @@ a {
 
 .body-4 {
   font-size: 11px;
+}
+
+.inline-link {
+  color: var(--color-primary);
+  text-decoration: underline;
 }
 
 @theme inline {
@@ -323,7 +323,8 @@ a {
 
 /* custom styles */
 
-[data-slot="dialog-trigger"] {
+[data-slot="dialog-trigger"],
+[data-slot="dropdown-menu-item"] {
   cursor: pointer;
 }
 

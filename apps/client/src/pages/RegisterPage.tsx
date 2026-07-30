@@ -92,7 +92,10 @@ export default function RegisterPage() {
           </Button>
 
           <span className="body-3">
-            Already have an account? <Link to="/login">Log in</Link>
+            Already have an account?{" "}
+            <Link to="/login" className="inline-link">
+              Log in
+            </Link>
           </span>
         </div>
       </form>
