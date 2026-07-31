@@ -3,7 +3,7 @@ import type { CreateCategoryDTO, UpdateCategoryDTO } from "../types";
 
 async function getCategories(): Promise<Category[]> {
   const [rows] = await pool.query<Category[]>(
-    "SELECT id, title, description, created_at FROM categories",
+    "SELECT id, title, description, color, created_at FROM categories",
   );
 
   return rows;
@@ -11,7 +11,7 @@ async function getCategories(): Promise<Category[]> {
 
 async function getCategory(categoryId: string): Promise<Category | null> {
   const [rows] = await pool.query<Category[]>(
-    "SELECT id, title, description, created_at FROM categories WHERE id = ?",
+    "SELECT id, title, description, color, created_at FROM categories WHERE id = ?",
     [categoryId],
   );
 
@@ -23,8 +23,8 @@ async function createCategory(
   data: CreateCategoryDTO,
 ): Promise<void> {
   await pool.query(
-    "INSERT INTO categories (id, title, description) VALUES (?, ?, ?)",
-    [categoryId, data.title, data.description],
+    "INSERT INTO categories (id, title, description, color) VALUES (?, ?, ?, ?)",
+    [categoryId, data.title, data.description, data.color],
   );
 }
 
@@ -43,6 +43,11 @@ async function updateCategory(
   if (data.description !== undefined) {
     updates.push("description = ?");
     values.push(data.description);
+  }
+
+  if (data.color !== undefined) {
+    updates.push("color = ?");
+    values.push(data.color);
   }
 
   if (updates.length === 0) return;
