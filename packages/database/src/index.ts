@@ -6,6 +6,8 @@ function requireEnv(key: string): string {
   return value;
 }
 
+const useSSL = process.env.DB_SSL === "true";
+
 export const pool = mysql.createPool({
   host: requireEnv("DB_HOST"),
   port: Number(requireEnv("DB_PORT")),
@@ -16,6 +18,11 @@ export const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
   dateStrings: true,
+  ...(useSSL && {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  }),
 });
 
 export type { QueryError } from "mysql2";
