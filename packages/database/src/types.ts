@@ -13,6 +13,7 @@ export interface Category extends RowDataPacket {
   id: string;
   title: string;
   description: string | null;
+  color: string;
   created_at: string;
 }
 
