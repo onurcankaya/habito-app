@@ -1,15 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { activitiesApi } from "@/api";
+import { QUERY_KEYS } from "@/constants";
 import type { CreateActivityRequest, CreateActivityResponse } from "@/types";
-
-const QUERY_KEY = "activities";
 
 /**
  * Hook to fetch all activities
  */
 export function useActivities() {
   return useQuery({
-    queryKey: [QUERY_KEY],
+    queryKey: [QUERY_KEYS.activities],
     queryFn: () => activitiesApi.fetchActivities(),
   });
 }
@@ -19,7 +18,7 @@ export function useActivities() {
  */
 export function useActivity(activityId: string) {
   return useQuery({
-    queryKey: [QUERY_KEY, activityId],
+    queryKey: [QUERY_KEYS.activities, activityId],
     queryFn: () => activitiesApi.fetchActivity(activityId),
   });
 }
@@ -34,7 +33,8 @@ export function useCreateActivity() {
     mutationFn: (
       data: CreateActivityRequest,
     ): Promise<CreateActivityResponse> => activitiesApi.createActivity(data),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY] }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.activities] }),
   });
 }
 
@@ -48,7 +48,7 @@ export function useDeleteActivity() {
     mutationFn: (activityId: string) =>
       activitiesApi.deleteActivity(activityId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.activities] });
     },
   });
 }

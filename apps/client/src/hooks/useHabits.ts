@@ -1,18 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { habitsApi } from "@/api";
+import { QUERY_KEYS } from "@/constants";
 import type {
   CreateHabitRequest,
   UpdateHabitRequest,
 } from "@/lib/schemas/habit";
-
-const QUERY_KEY = "habits";
 
 /**
  * Hook to fetch all habits
  */
 export function useHabits() {
   return useQuery({
-    queryKey: [QUERY_KEY],
+    queryKey: [QUERY_KEYS.habits],
     queryFn: () => habitsApi.fetchHabits(),
   });
 }
@@ -26,7 +25,7 @@ export function useCreateHabit() {
   return useMutation({
     mutationFn: (data: CreateHabitRequest) => habitsApi.createHabit(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.habits] });
     },
   });
 }
@@ -42,7 +41,7 @@ export function useUpdateHabit(habitId: string) {
     mutationFn: (data: UpdateHabitRequest) =>
       habitsApi.updateHabit(habitId, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.habits] });
     },
   });
 }
@@ -56,7 +55,7 @@ export function useDeleteHabit() {
   return useMutation({
     mutationFn: (habitId: string) => habitsApi.deleteHabit(habitId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.habits] });
     },
   });
 }
