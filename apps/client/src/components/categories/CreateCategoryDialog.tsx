@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ColorPicker } from "@/components/shared";
 import {
   Alert,
   AlertDescription,
@@ -15,6 +16,7 @@ import {
   Input,
 } from "@/components/ui";
 import { useCreateCategory } from "@/hooks";
+import { CATEGORY_COLORS } from "@/constants";
 import {
   createCategorySchema,
   type CreateCategoryRequest,
@@ -29,6 +31,7 @@ export default function CreateCategoryDialog() {
     register,
     handleSubmit,
     formState: { errors },
+    control,
     reset,
   } = useForm<CreateCategoryRequest>({
     resolver: zodResolver(createCategorySchema),
@@ -88,6 +91,17 @@ export default function CreateCategoryDialog() {
             placeholder="Optional notes about this category"
             {...register("description")}
             error={errors.description?.message}
+          />
+          <Controller
+            name="color"
+            control={control}
+            render={({ field, fieldState }) => (
+              <ColorPicker
+                value={field.value ?? CATEGORY_COLORS[0]}
+                onChange={field.onChange}
+                error={fieldState.error?.message}
+              />
+            )}
           />
 
           <DialogFooter className="flex justify-end gap-2">

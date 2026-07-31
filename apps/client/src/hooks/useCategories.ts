@@ -41,6 +41,7 @@ export function useUpdateCategory(categoryId: string) {
       categoriesApi.updateCategory(categoryId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.categories] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.habits] });
     },
   });
 }

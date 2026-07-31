@@ -41,7 +41,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
         </div>
 
         <div className="flex items-center gap-2">
-          <Badge label={category.title} />
+          <Badge label={category.title} color={category.color} />
 
           <DropdownMenu>
             <DropdownMenuTrigger render={<Button size="sm" variant="ghost" />}>

@@ -8,6 +8,7 @@ export type Habit = {
   user_id: string;
   category_id: string;
   category_title: string;
+  category_color: string;
 };
 
 export type HabitWithCompletion = Habit & {

@@ -36,7 +36,7 @@ export default function HabitCard({ habit }: HabitCardProps) {
         </div>
 
         <div className="flex items-center gap-2">
-          <Badge label={habit.category_title} />
+          <Badge label={habit.category_title} color={habit.category_color} />
 
           <DropdownMenu>
             <DropdownMenuTrigger render={<Button size="sm" variant="ghost" />}>

@@ -3,7 +3,7 @@ import type { CreateHabitDTO, UpdateHabitDTO } from "../types";
 
 async function getAllHabits(userId: string): Promise<Habit[]> {
   const [rows] = await pool.query<Habit[]>(
-    "SELECT h.id, h.title, h.description, h.frequency, h.user_id, h.category_id, h.created_at, h.updated_at, c.title AS category_title FROM habits h JOIN categories c ON h.category_id = c.id WHERE h.user_id = ?",
+    "SELECT h.id, h.title, h.description, h.frequency, h.user_id, h.category_id, h.created_at, h.updated_at, c.title AS category_title, c.color AS category_color FROM habits h JOIN categories c ON h.category_id = c.id WHERE h.user_id = ?",
     [userId],
   );
 
@@ -15,7 +15,7 @@ async function getHabit(
   habitId: string,
 ): Promise<Habit | null> {
   const [rows] = await pool.query<Habit[]>(
-    "SELECT id, title, description, frequency, user_id, category_id, created_at, updated_at FROM habits WHERE user_id = ? AND id = ?",
+    "SELECT h.id, h.title, h.description, h.frequency, h.user_id, h.category_id, h.created_at, h.updated_at, c.title AS category_title, c.color AS category_color FROM habits h JOIN categories c ON h.category_id = c.id WHERE h.user_id = ? AND h.id = ?",
     [userId, habitId],
   );
 
