@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 import { Card, CardContent, Checkbox } from "@/components/ui";
 import { Badge, ErrorMessage, QueryState } from "@/components/shared";
 import { GreetingSection } from "@/components/dashboard";
@@ -112,29 +113,43 @@ export default function HomePage() {
           error={habitsError}
           queryKeys={["habits"]}
         >
-          <div className="space-y-4">
-            {todaysHabits.map((habit: HabitWithCompletion) => (
-              <Card key={habit.id}>
-                <CardContent className="flex justify-between items-center">
-                  <div className="flex items-center gap-4">
-                    <Checkbox
-                      id={habit.id}
-                      checked={habit.is_completed}
-                      onCheckedChange={() => handleToggleHabitComplete(habit)}
-                      disabled={
-                        isLoadingCreateActivity || isLoadingDeleteActivity
-                      }
-                    />
-                    <div className="flex flex-col items-start gap-1">
-                      <p className="body-2 font-bold">{habit.title}</p>
-                      <p className="body-3">{habit.description}</p>
+          {todaysHabits.length === 0 ? (
+            <Card>
+              <CardContent>
+                <p className="body-2">
+                  You haven't created any habits yet. <br /> Navigate to{" "}
+                  <Link to="/habits" className="inline-link">
+                    /habits
+                  </Link>{" "}
+                  and create a habit to get started.
+                </p>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="space-y-4">
+              {todaysHabits.map((habit: HabitWithCompletion) => (
+                <Card key={habit.id}>
+                  <CardContent className="flex justify-between items-center">
+                    <div className="flex items-center gap-4">
+                      <Checkbox
+                        id={habit.id}
+                        checked={habit.is_completed}
+                        onCheckedChange={() => handleToggleHabitComplete(habit)}
+                        disabled={
+                          isLoadingCreateActivity || isLoadingDeleteActivity
+                        }
+                      />
+                      <div className="flex flex-col items-start gap-1">
+                        <p className="body-2 font-bold">{habit.title}</p>
+                        <p className="body-3">{habit.description}</p>
+                      </div>
                     </div>
-                  </div>
-                  <Badge label={habit.category_title} />
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    <Badge label={habit.category_title} />
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
         </QueryState>
       </div>
 
@@ -148,37 +163,48 @@ export default function HomePage() {
           error={activitiesError}
           queryKeys={["activities"]}
         >
-          <div className="space-y-8">
-            {Object.entries(activitiesByDate).map(
-              ([activityDate, activities]) => {
-                return (
-                  <div key={activityDate}>
-                    <div className="mb-3">
-                      <h6 className="text-left">{activityDate}</h6>
-                    </div>
+          {activities?.length === 0 ? (
+            <Card>
+              <CardContent>
+                <p className="body-2">
+                  No activities logged yet. <br />
+                  Complete a habit above to see it here.
+                </p>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="space-y-8">
+              {Object.entries(activitiesByDate).map(
+                ([activityDate, activities]) => {
+                  return (
+                    <div key={activityDate}>
+                      <div className="mb-3">
+                        <h6 className="text-left">{activityDate}</h6>
+                      </div>
 
-                    <div className="space-y-4">
-                      {activities.map((activity: Activity) => (
-                        <Card key={activity.id}>
-                          <CardContent className="flex justify-between items-center">
-                            <div className="flex items-center gap-4">
-                              <div className="flex flex-col items-start gap-1">
-                                <p className="body-2 font-bold">
-                                  {activity.habit_title}
-                                </p>
-                                <p className="body-3">{activity.notes}</p>
+                      <div className="space-y-4">
+                        {activities.map((activity: Activity) => (
+                          <Card key={activity.id}>
+                            <CardContent className="flex justify-between items-center">
+                              <div className="flex items-center gap-4">
+                                <div className="flex flex-col items-start gap-1">
+                                  <p className="body-2 font-bold">
+                                    {activity.habit_title}
+                                  </p>
+                                  <p className="body-3">{activity.notes}</p>
+                                </div>
                               </div>
-                            </div>
-                            <Badge label={activity.category_title} />
-                          </CardContent>
-                        </Card>
-                      ))}
+                              <Badge label={activity.category_title} />
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                );
-              },
-            )}
-          </div>
+                  );
+                },
+              )}
+            </div>
+          )}
         </QueryState>
       </div>
     </div>

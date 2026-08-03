@@ -1,4 +1,5 @@
 import { QueryState } from "@/components/shared";
+import { Card, CardContent } from "@/components/ui";
 import { CreateHabitDialog, HabitCard } from "@/components/habits";
 import { useHabits } from "@/hooks";
 
@@ -21,11 +22,22 @@ export default function HabitList() {
         error={fetchHabitsError}
         queryKeys={["habits"]}
       >
-        <div className="space-y-3">
-          {habits?.map((habit) => (
-            <HabitCard key={habit.id} mode="habits" habit={habit} />
-          ))}
-        </div>
+        {habits?.length === 0 ? (
+          <Card>
+            <CardContent>
+              <p className="body-2">
+                No habits to show. <br />
+                Click <b>+ New Habit</b> to create a new habit.
+              </p>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="space-y-3">
+            {habits?.map((habit) => (
+              <HabitCard key={habit.id} habit={habit} />
+            ))}
+          </div>
+        )}
       </QueryState>
     </div>
   );
