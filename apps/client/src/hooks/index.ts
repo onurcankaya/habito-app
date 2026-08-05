@@ -1,5 +1,5 @@
 export { useRegisterUser, useLoginUser } from "./useAuth";
-export { useUser } from "./useUser";
+export { useUser, useUpdateUser } from "./useUser";
 export {
   useActivities,
   useActivity,

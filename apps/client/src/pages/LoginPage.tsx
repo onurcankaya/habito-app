@@ -3,9 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUserSchema, type LoginUserRequest } from "@/lib/schemas/auth";
-import { useLoginUser } from "@/hooks/useAuth";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Button, Input } from "@/components/ui";
+import { useLoginUser } from "@/hooks";
 
 export default function LoginPage() {
   const [loginUserError, setLoginUserError] = useState<Error | null>();

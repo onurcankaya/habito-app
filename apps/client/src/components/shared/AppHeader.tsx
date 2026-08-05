@@ -4,6 +4,7 @@ import {
   Menu as MenuIcon,
   LayoutDashboard as DashboardIcon,
   ClipboardList as HabitsIcon,
+  User as UserIcon,
   LogOut as LogOutIcon,
 } from "lucide-react";
 import { AppTitle } from "@/components/shared";
@@ -62,6 +63,10 @@ export default function AppHeader() {
           <NavLink to="/habits" className={navLinkClassName}>
             <HabitsIcon className="h-4 w-4" />
             <span className="text-sm">Habits</span>
+          </NavLink>
+          <NavLink to="/profile" className={navLinkClassName}>
+            <UserIcon className="h-4 w-4" />
+            <span className="text-sm">Profile</span>
           </NavLink>
           <DropdownMenuItem
             onClick={(e) => {
