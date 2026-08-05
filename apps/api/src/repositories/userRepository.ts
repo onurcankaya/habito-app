@@ -1,13 +1,9 @@
 import { pool, type User } from "@habit-tracker/database";
-import type { CreateUserDTO, PublicUser, UpdateUserDTO } from "../types";
-
-async function getAllUsers(): Promise<PublicUser[]> {
-  const [rows] = await pool.query<User[]>(
-    "SELECT id, email, first_name, last_name FROM users",
-  );
-
-  return rows;
-}
+import type {
+  CreateUserDTO,
+  PublicUser,
+  UpdateUserRepositoryDTO,
+} from "../types";
 
 async function createUser(userId: string, data: CreateUserDTO): Promise<void> {
   await pool.query(
@@ -34,7 +30,10 @@ async function findUserById(userId: string): Promise<PublicUser | null> {
   return rows[0] ?? null;
 }
 
-async function updateUser(userId: string, data: UpdateUserDTO): Promise<void> {
+async function updateUser(
+  userId: string,
+  data: UpdateUserRepositoryDTO,
+): Promise<void> {
   const updates: string[] = [];
   const values: unknown[] = [];
 
@@ -42,9 +41,9 @@ async function updateUser(userId: string, data: UpdateUserDTO): Promise<void> {
     updates.push("email = ?");
     values.push(data.email);
   }
-  if (data.password !== undefined) {
-    updates.push("password = ?");
-    values.push(data.password);
+  if (data.password_hash !== undefined) {
+    updates.push("password_hash = ?");
+    values.push(data.password_hash);
   }
   if (data.first_name !== undefined) {
     updates.push("first_name = ?");
@@ -65,4 +64,4 @@ async function updateUser(userId: string, data: UpdateUserDTO): Promise<void> {
   );
 }
 
-export { getAllUsers, createUser, findUserByEmail, findUserById, updateUser };
+export { createUser, findUserByEmail, findUserById, updateUser };

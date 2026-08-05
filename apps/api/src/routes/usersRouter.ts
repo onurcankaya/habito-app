@@ -4,23 +4,11 @@ import express, {
   type NextFunction,
 } from "express";
 import * as userController from "../controllers/userController";
-import { authenticate } from "../middleware";
+import { authenticate, validate } from "../middleware";
+import { updateUserSchema } from "../lib/schemas/user";
+import { UpdateUserDTO } from "../types";
 
 const usersRouter = express.Router();
-
-usersRouter.get(
-  "/",
-  authenticate,
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const users = await userController.getAllUsers();
-
-      res.status(200).json(users);
-    } catch (error) {
-      next(error);
-    }
-  },
-);
 
 usersRouter.get(
   "/me",
@@ -38,15 +26,13 @@ usersRouter.get(
 );
 
 usersRouter.patch(
-  "/:id",
+  "/me",
   authenticate,
+  validate(updateUserSchema),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userId = req.user!.id;
-
-      if (userId !== req.params.id) throw new Error("Not authorized");
-
-      const data = req.body;
+      const data = req.body as UpdateUserDTO;
 
       await userController.updateUser(userId, data);
 

@@ -11,3 +11,10 @@ export type UpdateUserDTO = {
   first_name?: string;
   last_name?: string;
 };
+
+export type UpdateUserRepositoryDTO = {
+  email?: string;
+  password_hash?: string;
+  first_name?: string;
+  last_name?: string;
+};
