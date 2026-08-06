@@ -144,7 +144,10 @@ export default function HomePage() {
                         <p className="body-3">{habit.description}</p>
                       </div>
                     </div>
-                    <Badge label={habit.category_title} />
+                    <Badge
+                      label={habit.category_title}
+                      color={habit.category_color}
+                    />
                   </CardContent>
                 </Card>
               ))}
