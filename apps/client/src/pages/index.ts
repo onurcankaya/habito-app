@@ -7,6 +7,7 @@ import HabitsPage from "./HabitsPage";
 import HabitPage from "./HabitPage";
 import CategoriesPage from "./CategoriesPage";
 import CategoryPage from "./CategoryPage";
+import ProfilePage from "./ProfilePage";
 
 export {
   HomePage,
@@ -18,4 +19,5 @@ export {
   HabitPage,
   CategoriesPage,
   CategoryPage,
+  ProfilePage,
 };

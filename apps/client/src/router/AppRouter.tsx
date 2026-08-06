@@ -9,6 +9,7 @@ import {
   HabitPage,
   CategoriesPage,
   CategoryPage,
+  ProfilePage,
 } from "@/pages";
 import ProtectedRoute from "@/router/ProtectedRoute";
 import { AuthLayout, PageLayout } from "@/layouts";
@@ -28,6 +29,8 @@ export default function AppRouter() {
 
           <Route path="categories" element={<CategoriesPage />} />
           <Route path="categories/:id" element={<CategoryPage />} />
+
+          <Route path="profile" element={<ProfilePage />} />
         </Route>
       </Route>
 

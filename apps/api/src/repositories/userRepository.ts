@@ -1,5 +1,9 @@
 import { pool, type User } from "@habit-tracker/database";
-import type { CreateUserDTO, PublicUser } from "../types";
+import type {
+  CreateUserDTO,
+  PublicUser,
+  UpdateUserRepositoryDTO,
+} from "../types";
 
 async function createUser(userId: string, data: CreateUserDTO): Promise<void> {
   await pool.query(
@@ -26,4 +30,38 @@ async function findUserById(userId: string): Promise<PublicUser | null> {
   return rows[0] ?? null;
 }
 
-export { createUser, findUserByEmail, findUserById };
+async function updateUser(
+  userId: string,
+  data: UpdateUserRepositoryDTO,
+): Promise<void> {
+  const updates: string[] = [];
+  const values: unknown[] = [];
+
+  if (data.email !== undefined) {
+    updates.push("email = ?");
+    values.push(data.email);
+  }
+  if (data.password_hash !== undefined) {
+    updates.push("password_hash = ?");
+    values.push(data.password_hash);
+  }
+  if (data.first_name !== undefined) {
+    updates.push("first_name = ?");
+    values.push(data.first_name);
+  }
+  if (data.last_name !== undefined) {
+    updates.push("last_name = ?");
+    values.push(data.last_name);
+  }
+
+  if (updates.length === 0) return;
+
+  values.push(userId);
+
+  await pool.query(
+    `UPDATE users SET ${updates.join(", ")} WHERE id = ?`,
+    values,
+  );
+}
+
+export { createUser, findUserByEmail, findUserById, updateUser };
