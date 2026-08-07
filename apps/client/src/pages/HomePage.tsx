@@ -191,13 +191,25 @@ export default function HomePage() {
                             <CardContent className="flex justify-between items-center">
                               <div className="flex items-center gap-4">
                                 <div className="flex flex-col items-start gap-1">
-                                  <p className="body-2 font-bold">
-                                    {activity.habit_title}
-                                  </p>
+                                  <span className="flex items-center gap-3">
+                                    <div
+                                      className="w-[8px] h-[8px] rounded-full"
+                                      style={{
+                                        backgroundColor:
+                                          activity.category_color,
+                                      }}
+                                    />
+                                    <p className="body-2 font-bold">
+                                      {activity.habit_title}
+                                    </p>
+                                  </span>
                                   <p className="body-3">{activity.notes}</p>
                                 </div>
                               </div>
-                              <Badge label={activity.category_title} />
+                              <Badge
+                                label={activity.category_title}
+                                color={activity.category_color}
+                              />
                             </CardContent>
                           </Card>
                         ))}
