@@ -11,7 +11,7 @@ function AuthHeader() {
 
 function AuthFormWrapper() {
   return (
-    <div className="max-w-2xl mx-auto p-8 bg-card border rounded-lg mt-20">
+    <div className="max-w-lg mx-6 sm:mx-auto p-6 bg-card border rounded-lg mt-20">
       <Outlet />
     </div>
   );

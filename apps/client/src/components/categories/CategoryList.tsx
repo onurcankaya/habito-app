@@ -12,8 +12,8 @@ export default function CategoryList() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between">
-        <h1 className="text-left">Categories</h1>
+      <div className="flex items-center justify-between">
+        <h2 className="text-left">Categories</h2>
         <CreateCategoryDialog />
       </div>
 

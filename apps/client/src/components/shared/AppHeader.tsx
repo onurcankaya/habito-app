@@ -43,9 +43,11 @@ export default function AppHeader() {
     }`;
 
   return (
-    <div className="min-h-[80px] flex items-center justify-between border-b px-6">
-      <div className="px-4 py-2 border-2 border-primary rounded-full">
-        <h5>{isLoading ? "..." : user?.first_name || ""}</h5>
+    <div className="min-h-[80px] flex items-center justify-between border-b sm:px-6 px-4">
+      <div className="px-3 py-1.5 border-2 border-primary rounded-full">
+        <p className="text-xs font-bold">
+          {isLoading ? "..." : user?.first_name || ""}
+        </p>
       </div>
 
       <AppTitle />

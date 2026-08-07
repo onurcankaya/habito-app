@@ -27,19 +27,19 @@ export default function HabitCard({ habit }: HabitCardProps) {
 
   return (
     <Card>
-      <CardContent className="flex justify-between items-center">
-        <div className="flex items-center gap-4">
-          <div className="flex flex-col items-start gap-1">
-            <p className="body-2 font-bold">{habit.title}</p>
-            {habit.description && <p className="body-3">{habit.description}</p>}
-          </div>
+      <CardContent className="flex justify-between items-center gap-4">
+        <div className="flex flex-col items-start gap-1">
+          <p className="body-2 font-bold">{habit.title}</p>
+          {habit.description && (
+            <p className="body-3 text-left">{habit.description}</p>
+          )}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <Badge label={habit.category_title} color={habit.category_color} />
 
           <DropdownMenu>
-            <DropdownMenuTrigger render={<Button size="sm" variant="ghost" />}>
+            <DropdownMenuTrigger render={<Button size="xs" variant="ghost" />}>
               <MenuIcon className="h-4 w-4" />
             </DropdownMenuTrigger>
 

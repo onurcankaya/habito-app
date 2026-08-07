@@ -12,8 +12,8 @@ export default function HabitList() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between mb-6">
-        <h1 className="text-left">Habits</h1>
+      <div className="flex items-center justify-between">
+        <h2 className="text-left">Habits</h2>
         <CreateHabitDialog />
       </div>
 

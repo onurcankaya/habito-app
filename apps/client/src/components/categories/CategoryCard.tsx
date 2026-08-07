@@ -30,21 +30,19 @@ export default function CategoryCard({ category }: CategoryCardProps) {
 
   return (
     <Card>
-      <CardContent className="flex justify-between items-center">
-        <div className="flex items-center gap-4">
-          <div className="flex flex-col items-start gap-1">
-            <p className="body-2 font-bold">{category.title}</p>
-            {category.description && (
-              <p className="body-3">{category.description}</p>
-            )}
-          </div>
+      <CardContent className="flex justify-between items-center gap-4">
+        <div className="flex flex-col items-start gap-1">
+          <p className="body-2 font-bold">{category.title}</p>
+          {category.description && (
+            <p className="body-3 text-left">{category.description}</p>
+          )}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <Badge label={category.title} color={category.color} />
 
           <DropdownMenu>
-            <DropdownMenuTrigger render={<Button size="sm" variant="ghost" />}>
+            <DropdownMenuTrigger render={<Button size="xs" variant="ghost" />}>
               <MenuIcon className="h-4 w-4" />
             </DropdownMenuTrigger>
 

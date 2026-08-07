@@ -129,7 +129,7 @@ export default function HomePage() {
             <div className="space-y-4">
               {todaysHabits.map((habit: HabitWithCompletion) => (
                 <Card key={habit.id}>
-                  <CardContent className="flex justify-between items-center">
+                  <CardContent className="flex justify-between items-center gap-2">
                     <div className="flex items-center gap-4">
                       <Checkbox
                         id={habit.id}
@@ -141,7 +141,11 @@ export default function HomePage() {
                       />
                       <div className="flex flex-col items-start gap-1">
                         <p className="body-2 font-bold">{habit.title}</p>
-                        <p className="body-3">{habit.description}</p>
+                        {habit.description && (
+                          <p className="body-3 text-left">
+                            {habit.description}
+                          </p>
+                        )}
                       </div>
                     </div>
                     <Badge
@@ -203,7 +207,9 @@ export default function HomePage() {
                                       {activity.habit_title}
                                     </p>
                                   </span>
-                                  <p className="body-3">{activity.notes}</p>
+                                  {activity.notes && (
+                                    <p className="body-3">{activity.notes}</p>
+                                  )}
                                 </div>
                               </div>
                               <Badge

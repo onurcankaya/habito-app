@@ -2,13 +2,12 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Input } from "@/components/ui";
+import { useRegisterUser } from "@/hooks";
 import {
   registerUserSchema,
   type RegisterUserRequest,
 } from "@/lib/schemas/auth";
-import { useRegisterUser } from "@/hooks/useAuth";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 export default function RegisterPage() {
   const [registerUserError, setRegisterUserError] = useState<Error | null>();
@@ -40,18 +39,18 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {registerUserError && (
         <p className="text-destructive text-sm">{registerUserError.message}</p>
       )}
 
-      <div className="flex flex-col items-start">
+      <div className="flex flex-col items-start gap-1">
         <h2>Create your account</h2>
-        <p className="body-2">Start building habits that stick.</p>
+        <p className="body-3">Start building habits that stick.</p>
       </div>
 
-      <form onSubmit={handleSubmit(handleRegisterUser)} className="space-y-6">
-        <div className="grid grid-cols-2 gap-4">
+      <form onSubmit={handleSubmit(handleRegisterUser)} className="space-y-4">
+        <div className="grid grid-cols-2 gap-3">
           <Input
             id="first_name"
             label="First Name"
@@ -86,8 +85,13 @@ export default function RegisterPage() {
           error={errors.password?.message}
         />
 
-        <div className="flex flex-col space-y-4">
-          <Button type="submit" variant="primary" disabled={isPending}>
+        <div className="flex flex-col space-y-3">
+          <Button
+            type="submit"
+            size="sm"
+            variant="primary"
+            disabled={isPending}
+          >
             Create account
           </Button>
 

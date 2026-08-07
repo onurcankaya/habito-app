@@ -12,7 +12,7 @@ export default function Badge({ label, color }: BadgeProps) {
           style={{ backgroundColor: color }}
         />
       )}
-      <p className="body-4">{label}</p>
+      <p className="body-4 whitespace-nowrap">{label}</p>
     </div>
   );
 }

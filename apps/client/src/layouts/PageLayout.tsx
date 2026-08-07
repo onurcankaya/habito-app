@@ -3,7 +3,7 @@ import AppHeader from "@/components/shared/AppHeader";
 
 function PageWrapper() {
   return (
-    <div className="max-w-2xl mx-auto px-8 mt-10">
+    <div className="max-w-2xl mx-auto sm:px-8 px-5 mt-10">
       <Outlet />
     </div>
   );

@@ -36,17 +36,17 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {loginUserError && (
         <p className="text-destructive text-sm">{loginUserError.message}</p>
       )}
 
-      <div className="flex flex-col items-start">
+      <div className="flex flex-col items-start gap-1">
         <h2>Welcome back</h2>
-        <p className="body-2">Log in to keep your streaks alive.</p>
+        <p className="body-3">Log in to keep your streaks alive.</p>
       </div>
 
-      <form onSubmit={handleSubmit(handleLoginUser)} className="space-y-6">
+      <form onSubmit={handleSubmit(handleLoginUser)} className="space-y-4">
         <Input
           id="email"
           label="Email"
@@ -64,8 +64,13 @@ export default function LoginPage() {
           error={errors.password?.message}
         />
 
-        <div className="flex flex-col space-y-4">
-          <Button type="submit" variant="primary" disabled={isPending}>
+        <div className="flex flex-col space-y-3">
+          <Button
+            type="submit"
+            size="sm"
+            variant="primary"
+            disabled={isPending}
+          >
             Log in
           </Button>
 
