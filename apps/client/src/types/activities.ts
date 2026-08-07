@@ -6,6 +6,7 @@ export type Activity = {
   habit_id: string;
   habit_title: string;
   category_title: string;
+  category_color: string;
 };
 
 export type FetchActivitiesResponse = Activity[];

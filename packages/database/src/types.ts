@@ -27,6 +27,7 @@ export interface Habit extends RowDataPacket {
   user_id: string;
   category_id: string;
   category_title: string;
+  category_color: string;
 }
 
 export interface CompletedActivity extends RowDataPacket {
@@ -37,4 +38,5 @@ export interface CompletedActivity extends RowDataPacket {
   habit_id: string;
   habit_title: string;
   category_title: string;
+  category_color: string;
 }
