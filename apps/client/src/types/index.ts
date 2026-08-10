@@ -1,5 +1,5 @@
 export type { AuthResponse } from "./auth";
-export type { UserResponse } from "./user";
+export type { User, UserResponse } from "./user";
 export type {
   Activity,
   FetchActivitiesResponse,
