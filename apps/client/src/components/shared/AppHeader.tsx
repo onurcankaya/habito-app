@@ -44,9 +44,11 @@ export default function AppHeader() {
 
   return (
     <div className="min-h-[80px] flex items-center justify-between border-b sm:px-6 px-4">
-      <div className="px-3 py-1.5 border-2 border-primary rounded-full">
+      <div className="px-3 py-1.5 border-primary border-2 rounded-full">
         <p className="text-xs font-bold">
-          {isLoading ? "..." : user?.first_name || ""}
+          {isLoading
+            ? "..."
+            : `${user?.first_name[0]}${user?.last_name[0]}` || ""}
         </p>
       </div>
 
