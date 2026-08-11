@@ -1,6 +1,6 @@
-# Habit Tracker Monorepo
+# Habito Monorepo
 
-## Habit Tracker API
+## Habito API
 
 ### Auth API
 
