@@ -20,7 +20,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       "rounded-full font-bold transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed";
 
     const variants = {
-      primary: "bg-primary hover:bg-primary/90 text-primary-foreground",
+      primary: "bg-primary-dark hover:bg-primary-dark/90 text-foreground",
       secondary: "bg-secondary hover:bg-secondary/80 text-secondary-foreground",
       destructive: "bg-destructive hover:bg-destructive/90 text-white",
       outline: "border border-border text-foreground hover:bg-muted",

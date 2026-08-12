@@ -10,6 +10,7 @@ import {
   useHabits,
 } from "@/hooks";
 import { formatDate } from "@/utils/date";
+import { cn } from "@/lib/utils";
 import type { Activity, HabitWithCompletion } from "@/types";
 
 export default function HomePage() {
@@ -140,7 +141,14 @@ export default function HomePage() {
                         }
                       />
                       <div className="flex flex-col items-start gap-1">
-                        <p className="body-2 font-bold">{habit.title}</p>
+                        <p
+                          className={cn(
+                            "body-2 font-bold",
+                            habit.is_completed && "line-through",
+                          )}
+                        >
+                          {habit.title}
+                        </p>
                         {habit.description && (
                           <p className="body-3 text-left">
                             {habit.description}
