@@ -27,7 +27,7 @@ export default function HabitList() {
             <CardContent>
               <p className="body-2">
                 No habits to show. <br />
-                Click <b>+ New Habit</b> to create a new habit.
+                Click <b>+ New habit</b> to create a new habit.
               </p>
             </CardContent>
           </Card>

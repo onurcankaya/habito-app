@@ -27,7 +27,7 @@ export default function CategoryList() {
             <CardContent>
               <p className="body-2">
                 No categories to show. <br />
-                Click <b>+ New Category</b> to create a new category.
+                Click <b>+ New category</b> to create a new category.
               </p>
             </CardContent>
           </Card>

@@ -53,7 +53,7 @@ export default function CreateHabitDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<Button size="sm" variant="primary" />}>
-        + New Habit
+        + New habit
       </DialogTrigger>
 
       <DialogContent>

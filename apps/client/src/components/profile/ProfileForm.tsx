@@ -62,7 +62,7 @@ export default function ProfileForm({
       />
 
       <Button type="submit" size="sm" disabled={isLoading} className="w-full">
-        Save Changes
+        Save changes
       </Button>
     </form>
   );
