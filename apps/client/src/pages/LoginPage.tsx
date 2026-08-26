@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUserSchema, type LoginUserRequest } from "@/lib/schemas/auth";
 import { Button, Input } from "@/components/ui";
+import { ErrorMessage } from "@/components/shared";
 import { useLoginUser } from "@/hooks";
 
 export default function LoginPage() {
@@ -27,9 +28,9 @@ export default function LoginPage() {
         navigate("/");
       },
       onError: (error) => {
-        console.error("Failed to log in user: ", error);
+        console.error("Failed to log in: ", error);
         setLoginUserError(
-          error instanceof Error ? error : new Error("Failed to log in user"),
+          error instanceof Error ? error : new Error("Failed to log in"),
         );
       },
     });
@@ -37,14 +38,12 @@ export default function LoginPage() {
 
   return (
     <div className="space-y-6">
-      {loginUserError && (
-        <p className="text-destructive text-sm">{loginUserError.message}</p>
-      )}
-
       <div className="flex flex-col items-start gap-1">
         <h2>Welcome back</h2>
         <p className="body-3">Log in to keep your streaks alive.</p>
       </div>
+
+      {loginUserError && <ErrorMessage error={loginUserError} />}
 
       <form onSubmit={handleSubmit(handleLoginUser)} className="space-y-4">
         <Input

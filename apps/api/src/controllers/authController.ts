@@ -6,18 +6,23 @@ import * as userRepository from "../repositories/userRepository";
 import { requireEnv } from "../utils/env";
 
 async function registerUser(data: RegisterUserDTO) {
+  const user = await userRepository.findUserByEmail(data.email);
+
+  if (user) {
+    throw new Error("Email already in use");
+  }
+
   const userId = uuidv4();
   const password_hash = await bcrypt.hash(data.password, 10);
 
   await userRepository.createUser(userId, { ...data, password_hash });
+  const newUser = await userRepository.findUserByEmail(data.email);
 
-  const user = await userRepository.findUserByEmail(data.email);
-
-  if (!user) {
+  if (!newUser) {
     throw new Error("Failed to create user");
   }
 
-  const token = jwt.sign({ sub: user.id }, requireEnv("JWT_SECRET"), {
+  const token = jwt.sign({ sub: newUser.id }, requireEnv("JWT_SECRET"), {
     expiresIn: "7d",
   });
 

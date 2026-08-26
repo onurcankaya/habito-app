@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Input } from "@/components/ui";
+import { ErrorMessage } from "@/components/shared";
 import { useRegisterUser } from "@/hooks";
 import {
   registerUserSchema,
@@ -40,14 +41,12 @@ export default function RegisterPage() {
 
   return (
     <div className="space-y-6">
-      {registerUserError && (
-        <p className="text-destructive text-sm">{registerUserError.message}</p>
-      )}
-
       <div className="flex flex-col items-start gap-1">
         <h2>Create your account</h2>
         <p className="body-3">Start building habits that stick.</p>
       </div>
+
+      {registerUserError && <ErrorMessage error={registerUserError} />}
 
       <form onSubmit={handleSubmit(handleRegisterUser)} className="space-y-4">
         <div className="grid grid-cols-2 gap-3">
