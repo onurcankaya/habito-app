@@ -1,8 +1,8 @@
-import { Alert, AlertDescription } from "./alert";
-import { Button } from "./button";
-import { Card, CardHeader, CardTitle, CardContent } from "./card";
-import { Checkbox } from "./checkbox";
-import {
+export { Alert, AlertDescription } from "./alert";
+export { Button } from "./button";
+export { Card, CardHeader, CardTitle, CardContent } from "./card";
+export { Checkbox } from "./checkbox";
+export {
   Dialog,
   DialogContent,
   DialogHeader,
@@ -11,37 +11,12 @@ import {
   DialogFooter,
   DialogClose,
 } from "./dialog";
-import {
+export {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "./dropdown-menu";
-import { Input } from "./input";
-import { Select } from "./select";
-
-export {
-  Alert,
-  AlertDescription,
-  Button,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  Checkbox,
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogFooter,
-  DialogClose,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
-  Input,
-  Select,
-};
+export { Input } from "./input";
+export { Select } from "./select";
